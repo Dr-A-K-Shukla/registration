@@ -20,10 +20,7 @@ form {
   width: 360px;
   text-align: center;
 }
-h2 {
-  color: #1565c0;
-  margin-bottom: 20px;
-}
+h2 { color: #1565c0; margin-bottom: 20px; }
 input {
   width: 100%;
   padding: 12px;
@@ -43,18 +40,13 @@ button {
   cursor: pointer;
   transition: background 0.3s;
 }
-button:hover {
-  background: #0d47a1;
-}
+button:hover { background: #0d47a1; }
 footer {
   margin-top: 20px;
   font-size: 13px;
   color: #555;
 }
-footer span {
-  font-weight: bold;
-  color: #1565c0;
-}
+footer span { font-weight: bold; color: #1565c0; }
 </style>
 </head>
 <body>
@@ -74,17 +66,15 @@ const scriptURL = "https://script.google.com/macros/s/AKfycbzclvP9dbLmhdqprVaXQa
 
 document.getElementById("testForm").addEventListener("submit", e => {
   e.preventDefault();
-
-  const form = e.target;
-  const formData = new FormData(form);
+  const formData = new FormData(e.target);
 
   fetch(scriptURL, { method: 'POST', body: formData })
-    .then(response => response.text())
-    .then(text => {
-      alert("✅ Registration Successful! Your test will begin.");
-      window.location.href = "test.html"; // replace this with your quiz page
+    .then(res => res.text())
+    .then(() => {
+      alert("✅ Registration Successful!");
+      e.target.reset();
     })
-    .catch(error => alert("❌ Error submitting form! Please try again."));
+    .catch(() => alert("❌ Error! Please try again."));
 });
 </script>
 
