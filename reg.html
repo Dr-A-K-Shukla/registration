@@ -2,81 +2,53 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Student Test Registration | DBS PG College Kanpur</title>
+<title>Student Test Registration</title>
 <style>
 body {
   font-family: "Segoe UI", sans-serif;
-  background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+  background: #f4f6fa;
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
-  margin: 0;
 }
-
 form {
   background: white;
-  padding: 30px 35px;
-  border-radius: 12px;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-  width: 360px;
-  text-align: center;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+  width: 350px;
 }
-
-h2 {
-  color: #0d47a1;
-  margin-bottom: 20px;
-}
-
 input {
   width: 100%;
-  padding: 12px;
-  margin: 8px 0;
+  padding: 10px;
+  margin: 10px 0;
   border: 1px solid #ccc;
-  border-radius: 6px;
-  font-size: 15px;
+  border-radius: 5px;
 }
-
 button {
   width: 100%;
-  background: #1976d2;
+  background: #0078d7;
   color: white;
   border: none;
-  padding: 12px;
-  border-radius: 6px;
+  padding: 10px;
+  border-radius: 5px;
   font-size: 16px;
-  cursor: pointer;
-  transition: background 0.3s ease;
 }
-
 button:hover {
-  background: #0d47a1;
-}
-
-footer {
-  text-align: center;
-  margin-top: 18px;
-  font-size: 13px;
-  color: #555;
-}
-footer span {
-  color: #0d47a1;
-  font-weight: 600;
+  background: #005bb5;
 }
 </style>
 </head>
 <body>
 
 <form id="testForm">
-  <img src="https://dbskanpur.ac.in/images/logo.png" alt="DBS PG College Logo" width="80">
-  <h2>DBS PG College Kanpur</h2>
-  <h3 style="margin-top:-10px; color:#444;">Student Test Registration</h3>
-  <input type="text" name="name" placeholder="Full Name" required>
-  <input type="text" name="college" placeholder="College Name" required>
-  <input type="text" name="class" placeholder="Class" required>
-  <input type="text" name="mobile" placeholder="Mobile Number" required>
+  <h2>Test Registration</h2>
+  <input type="text" name="Name" placeholder="Full Name" required>
+  <input type="text" name="College" placeholder="College Name" required>
+  <input type="text" name="Class" placeholder="Class" required>
+  <input type="text" name="Mobile" placeholder="Mobile Number" required>
   <button type="submit">Start Test</button>
-  <footer>Designed & Developed by <span>Dr. Ashish Kumar Shukla</span></footer>
 </form>
 
 <script>
@@ -85,17 +57,24 @@ const scriptURL = "https://script.google.com/macros/s/AKfycbzclvP9dbLmhdqprVaXQa
 document.getElementById("testForm").addEventListener("submit", e => {
   e.preventDefault();
   const form = e.target;
-  const formData = new FormData(form);
+  const data = {
+    Name: form.Name.value,
+    College: form.College.value,
+    Class: form.Class.value,
+    Mobile: form.Mobile.value
+  };
 
-  fetch(scriptURL, { method: 'POST', body: formData })
-    .then(() => {
-      alert("✅ Registration Successful! Your test will begin now.");
-      window.location.href = "test.html"; // change this to your actual test page
-    })
-    .catch(err => {
-      console.error(err);
-      alert("❌ Error! Please try again later.");
-    });
+  fetch(scriptURL, {
+    method: "POST",
+    body: JSON.stringify(data),
+    headers: { "Content-Type": "application/json" }
+  })
+  .then(res => res.text())
+  .then(response => {
+    alert("Registration Successful!");
+    window.location.href = "test.html";
+  })
+  .catch(err => alert("Error: " + err));
 });
 </script>
 
