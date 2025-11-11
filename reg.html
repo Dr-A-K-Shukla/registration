@@ -102,35 +102,35 @@ footer {
 </footer>
 
 <script>
-// ✅ Live Google Apps Script URL
 const scriptURL = "https://script.google.com/macros/s/AKfycbwbqC2JDxYIS0PJRXOHLhIn9kMoflYmx6yNi8FAXq-0eFS5oqIMSk1Juryvl7E29t4IYA/exec";
 
 document.getElementById("testForm").addEventListener("submit", e => {
   e.preventDefault();
-  const f = e.target;
+  const form = e.target;
   const data = {
-    name: f.name.value,
-    college: f.college.value,
-    class: f.class.value,
-    mobile: f.mobile.value
+    name: form.name.value,
+    college: form.college.value,
+    class: form.class.value,
+    mobile: form.mobile.value
   };
 
   fetch(scriptURL, {
-    method: "POST",
+    method: 'POST',
+    mode: 'no-cors',  // ✅ add this line
+    headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(data)
   })
-  .then(res => res.text())
-  .then(r => {
-    if (r === "Success") {
-      alert("Registration Successful! Test will now start.");
-      window.location.href = "test.html"; // replace with your test page
-    } else {
-      alert("Unexpected response: " + r);
-    }
+  .then(() => {
+    alert("Registration Successful!");
+    window.location.href = "test.html";
   })
-  .catch(err => alert("Error submitting form. Please try again."));
+  .catch(err => {
+    console.error(err);
+    alert("Error occurred! Please try again.");
+  });
 });
 </script>
 
 </body>
 </html>
+
