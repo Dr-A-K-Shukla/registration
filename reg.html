@@ -2,51 +2,32 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>DBS PG College Kanpur – Test Registration</title>
+<title>Student Test Registration | DBS PG College Kanpur</title>
 <style>
 body {
   font-family: "Segoe UI", sans-serif;
-  background: linear-gradient(135deg, #e8f0ff, #f8fbff);
-  margin: 0;
+  background: linear-gradient(135deg, #e3f2fd, #bbdefb);
   display: flex;
-  flex-direction: column;
+  justify-content: center;
   align-items: center;
-  min-height: 100vh;
-}
-header {
-  width: 100%;
-  background: #003366;
-  color: white;
-  text-align: center;
-  padding: 20px 10px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-}
-header img {
-  height: 60px;
-  vertical-align: middle;
-  margin-right: 10px;
-}
-header h1 {
-  display: inline-block;
-  font-size: 22px;
+  height: 100vh;
   margin: 0;
-  vertical-align: middle;
 }
+
 form {
   background: white;
-  padding: 30px 25px;
+  padding: 30px 35px;
   border-radius: 12px;
-  box-shadow: 0 6px 20px rgba(0,0,0,0.1);
-  width: 90%;
-  max-width: 400px;
-  margin-top: 40px;
-}
-h2 {
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+  width: 360px;
   text-align: center;
-  color: #003366;
+}
+
+h2 {
+  color: #0d47a1;
   margin-bottom: 20px;
 }
+
 input {
   width: 100%;
   padding: 12px;
@@ -55,82 +36,68 @@ input {
   border-radius: 6px;
   font-size: 15px;
 }
+
 button {
   width: 100%;
-  padding: 12px;
-  background: #004aad;
+  background: #1976d2;
   color: white;
   border: none;
+  padding: 12px;
   border-radius: 6px;
   font-size: 16px;
   cursor: pointer;
-  transition: 0.3s;
+  transition: background 0.3s ease;
 }
+
 button:hover {
-  background: #002f73;
+  background: #0d47a1;
 }
+
 footer {
-  margin-top: auto;
-  width: 100%;
   text-align: center;
-  padding: 15px 10px;
-  background: #f0f4f8;
-  font-size: 14px;
-  color: #333;
-  border-top: 1px solid #ddd;
+  margin-top: 18px;
+  font-size: 13px;
+  color: #555;
+}
+footer span {
+  color: #0d47a1;
+  font-weight: 600;
 }
 </style>
 </head>
 <body>
 
-<header>
-  <img src="https://upload.wikimedia.org/wikipedia/en/4/4e/DBS_PG_College_Kanpur_logo.png" alt="College Logo">
-  <h1>DBS PG College, Kanpur</h1>
-</header>
-
 <form id="testForm">
-  <h2>Student Test Registration</h2>
+  <img src="https://dbskanpur.ac.in/images/logo.png" alt="DBS PG College Logo" width="80">
+  <h2>DBS PG College Kanpur</h2>
+  <h3 style="margin-top:-10px; color:#444;">Student Test Registration</h3>
   <input type="text" name="name" placeholder="Full Name" required>
   <input type="text" name="college" placeholder="College Name" required>
   <input type="text" name="class" placeholder="Class" required>
   <input type="text" name="mobile" placeholder="Mobile Number" required>
-  <button type="submit">Submit & Start Test</button>
+  <button type="submit">Start Test</button>
+  <footer>Designed & Developed by <span>Dr. Ashish Kumar Shukla</span></footer>
 </form>
 
-<footer>
-  Designed & Developed by <b>Dr. Ashish Kumar Shukla</b>
-</footer>
-
 <script>
-const scriptURL = "https://script.google.com/macros/s/AKfycbwbqC2JDxYIS0PJRXOHLhIn9kMoflYmx6yNi8FAXq-0eFS5oqIMSk1Juryvl7E29t4IYA/exec";
+const scriptURL = "https://script.google.com/macros/s/AKfycbzclvP9dbLmhdqprVaXQaQp11USy-TWEm0mS-hquFKk7M9yDdYAyLO_H8lXe0Bi--G-eA/exec";
 
 document.getElementById("testForm").addEventListener("submit", e => {
   e.preventDefault();
   const form = e.target;
-  const data = {
-    name: form.name.value,
-    college: form.college.value,
-    class: form.class.value,
-    mobile: form.mobile.value
-  };
+  const formData = new FormData(form);
 
-  fetch(scriptURL, {
-    method: 'POST',
-    mode: 'no-cors',  // ✅ add this line
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(data)
-  })
-  .then(() => {
-    alert("Registration Successful!");
-    window.location.href = "test.html";
-  })
-  .catch(err => {
-    console.error(err);
-    alert("Error occurred! Please try again.");
-  });
+  fetch(scriptURL, { method: 'POST', body: formData })
+    .then(() => {
+      alert("✅ Registration Successful! Your test will begin now.");
+      window.location.href = "test.html"; // change this to your actual test page
+    })
+    .catch(err => {
+      console.error(err);
+      alert("❌ Error! Please try again later.");
+    });
 });
 </script>
 
 </body>
 </html>
-
