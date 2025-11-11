@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DBS PG College Kanpur – Test Registration</title>
+<style>
+body {
+  font-family: "Segoe UI", sans-serif;
+  background: linear-gradient(135deg, #e8f0ff, #f8fbff);
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+}
+header {
+  width: 100%;
+  background: #003366;
+  color: white;
+  text-align: center;
+  padding: 20px 10px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+header img {
+  height: 60px;
+  vertical-align: middle;
+  margin-right: 10px;
+}
+header h1 {
+  display: inline-block;
+  font-size: 22px;
+  margin: 0;
+  vertical-align: middle;
+}
+form {
+  background: white;
+  padding: 30px 25px;
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+  width: 90%;
+  max-width: 400px;
+  margin-top: 40px;
+}
+h2 {
+  text-align: center;
+  color: #003366;
+  margin-bottom: 20px;
+}
+input {
+  width: 100%;
+  padding: 12px;
+  margin: 8px 0;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 15px;
+}
+button {
+  width: 100%;
+  padding: 12px;
+  background: #004aad;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+button:hover {
+  background: #002f73;
+}
+footer {
+  margin-top: auto;
+  width: 100%;
+  text-align: center;
+  padding: 15px 10px;
+  background: #f0f4f8;
+  font-size: 14px;
+  color: #333;
+  border-top: 1px solid #ddd;
+}
+</style>
+</head>
+<body>
+
+<header>
+  <img src="https://upload.wikimedia.org/wikipedia/en/4/4e/DBS_PG_College_Kanpur_logo.png" alt="College Logo">
+  <h1>DBS PG College, Kanpur</h1>
+</header>
+
+<form id="testForm">
+  <h2>Student Test Registration</h2>
+  <input type="text" name="name" placeholder="Full Name" required>
+  <input type="text" name="college" placeholder="College Name" required>
+  <input type="text" name="class" placeholder="Class" required>
+  <input type="text" name="mobile" placeholder="Mobile Number" required>
+  <button type="submit">Submit & Start Test</button>
+</form>
+
+<footer>
+  Designed & Developed by <b>Dr. Ashish Kumar Shukla</b>
+</footer>
+
+<script>
+// ✅ Live Google Apps Script URL
+const scriptURL = "https://script.google.com/macros/s/AKfycbwbqC2JDxYIS0PJRXOHLhIn9kMoflYmx6yNi8FAXq-0eFS5oqIMSk1Juryvl7E29t4IYA/exec";
+
+document.getElementById("testForm").addEventListener("submit", e => {
+  e.preventDefault();
+  const f = e.target;
+  const data = {
+    name: f.name.value,
+    college: f.college.value,
+    class: f.class.value,
+    mobile: f.mobile.value
+  };
+
+  fetch(scriptURL, {
+    method: "POST",
+    body: JSON.stringify(data)
+  })
+  .then(res => res.text())
+  .then(r => {
+    if (r === "Success") {
+      alert("Registration Successful! Test will now start.");
+      window.location.href = "test.html"; // replace with your test page
+    } else {
+      alert("Unexpected response: " + r);
+    }
+  })
+  .catch(err => alert("Error submitting form. Please try again."));
+});
+</script>
+
+</body>
+</html>
