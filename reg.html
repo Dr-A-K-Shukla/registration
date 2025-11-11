@@ -61,7 +61,8 @@ document.getElementById("testForm").addEventListener("submit", async e => {
     alert("✅ Registration Successful!");
     form.reset();
   } catch (err) {
-    alert("❌ Error submitting form! Check network or script URL.");
+    alert("❌ Error submitting form! Check internet or script URL.");
+    console.error(err);
   }
 });
 </script>
