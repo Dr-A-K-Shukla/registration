@@ -6,37 +6,54 @@
 <style>
 body {
   font-family: "Segoe UI", sans-serif;
-  background: #f4f6fa;
+  background: linear-gradient(135deg, #e3f2fd, #bbdefb);
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
 }
 form {
-  background: white;
+  background: #fff;
   padding: 30px;
-  border-radius: 10px;
-  box-shadow: 0 6px 18px rgba(0,0,0,0.1);
-  width: 350px;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+  width: 360px;
+  text-align: center;
+}
+h2 {
+  color: #1565c0;
+  margin-bottom: 20px;
 }
 input {
   width: 100%;
-  padding: 10px;
+  padding: 12px;
   margin: 10px 0;
-  border: 1px solid #ccc;
-  border-radius: 5px;
+  border: 1px solid #90caf9;
+  border-radius: 6px;
+  font-size: 15px;
 }
 button {
   width: 100%;
-  background: #0078d7;
+  background: #1976d2;
   color: white;
   border: none;
-  padding: 10px;
-  border-radius: 5px;
+  padding: 12px;
+  border-radius: 6px;
   font-size: 16px;
+  cursor: pointer;
+  transition: background 0.3s;
 }
 button:hover {
-  background: #005bb5;
+  background: #0d47a1;
+}
+footer {
+  margin-top: 20px;
+  font-size: 13px;
+  color: #555;
+}
+footer span {
+  font-weight: bold;
+  color: #1565c0;
 }
 </style>
 </head>
@@ -49,6 +66,7 @@ button:hover {
   <input type="text" name="Class" placeholder="Class" required>
   <input type="text" name="Mobile" placeholder="Mobile Number" required>
   <button type="submit">Start Test</button>
+  <footer>Designed & Developed by <span>Dr. Ashish Kumar Shukla</span></footer>
 </form>
 
 <script>
@@ -56,25 +74,17 @@ const scriptURL = "https://script.google.com/macros/s/AKfycbzclvP9dbLmhdqprVaXQa
 
 document.getElementById("testForm").addEventListener("submit", e => {
   e.preventDefault();
-  const form = e.target;
-  const data = {
-    Name: form.Name.value,
-    College: form.College.value,
-    Class: form.Class.value,
-    Mobile: form.Mobile.value
-  };
 
-  fetch(scriptURL, {
-    method: "POST",
-    body: JSON.stringify(data),
-    headers: { "Content-Type": "application/json" }
-  })
-  .then(res => res.text())
-  .then(response => {
-    alert("Registration Successful!");
-    window.location.href = "test.html";
-  })
-  .catch(err => alert("Error: " + err));
+  const form = e.target;
+  const formData = new FormData(form);
+
+  fetch(scriptURL, { method: 'POST', body: formData })
+    .then(response => response.text())
+    .then(text => {
+      alert("✅ Registration Successful! Your test will begin.");
+      window.location.href = "test.html"; // replace this with your quiz page
+    })
+    .catch(error => alert("❌ Error submitting form! Please try again."));
 });
 </script>
 
