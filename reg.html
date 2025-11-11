@@ -66,17 +66,22 @@ const scriptURL = "https://script.google.com/macros/s/AKfycbzclvP9dbLmhdqprVaXQa
 
 document.getElementById("testForm").addEventListener("submit", e => {
   e.preventDefault();
-  const formData = new FormData(e.target);
 
-  fetch(scriptURL, { method: 'POST', body: formData })
-    .then(res => res.text())
-    .then(() => {
-      alert("✅ Registration Successful!");
-      e.target.reset();
-    })
-    .catch(() => alert("❌ Error! Please try again."));
+  const form = e.target;
+  const formData = new FormData(form);
+
+  fetch(scriptURL, {
+    method: "POST",
+    body: formData,
+    mode: "no-cors"
+  });
+
+  alert("✅ Registration Submitted!");
+  form.reset();
 });
 </script>
 
+
 </body>
 </html>
+
